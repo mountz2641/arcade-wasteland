@@ -12,13 +12,13 @@ class GameWindow(arcade.Window):
 
         #set player up
         self.player = Player('./image/cowboy.png', 0.1)
-        self.player.setup(self, width // 2, height // 2)
+        self.player.setup(self, width // 2, height // 2 + 50)
 
     def on_key_press(self, key, key_modifiers):
         if(key == arcade.key.UP):
             if(self.player.location < 2):
                 self.player.walk('up')
-        elif(key == arcade.key.DOWN)
+        elif(key == arcade.key.DOWN):
             if(self.player.location > 0):
                 self.player.walk('down')
 
