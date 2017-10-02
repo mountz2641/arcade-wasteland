@@ -1,6 +1,7 @@
 import arcade
 from player import Player
 from enemy import Enemy
+from wall import Wall
 from random import randint
 
 SCREEN_WIDTH = 1000
@@ -15,6 +16,7 @@ class GameWindow(arcade.Window):
         
         self.sprite_list = []
         self.enemy_list = []
+        self.wall_list = []
 
         arcade.set_background_color(arcade.color.BLACK)
 
@@ -22,6 +24,12 @@ class GameWindow(arcade.Window):
         self.player = Player('./image/cowboy.png', 0.1)
         self.player.setup(self, width // 2 - 25, height // 2 + 50)
         self.sprite_list.append(self.player)
+
+        #construct 6 wall
+        for i in range (0, 6):
+            self.wall = Wall('./image/wall.png', 1)
+            self.wall.setup(i)
+            self.wall_list.append(self.wall)
 
     def on_key_press(self, key, key_modifiers):
         if(key == arcade.key.UP):
@@ -58,6 +66,8 @@ class GameWindow(arcade.Window):
             sprite.draw()
         for enemy in self.enemy_list:
             enemy.draw()
+        for wall in self.wall_list:
+            wall.draw()
 
 
 def main():
