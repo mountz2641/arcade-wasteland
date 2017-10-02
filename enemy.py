@@ -10,24 +10,30 @@ class Enemy (arcade.Sprite):
         self.health = 1
         self.direction = 1
         if(lane == 0):
-            self.center_x = 80
+            self.center_x = -80
             self.center_y = SCREEN_HEIGHT // 2 + (50 - LANE_SIZE)
+            self.direction = 1
         elif(lane == 1):
-            self.center_x = 80
+            self.center_x = -80
             self.center_y = SCREEN_HEIGHT // 2 + 50
+            self.direction = 1
         elif(lane == 2):
-            self.center_x = 80
+            self.center_x = -80
             self.center_y = SCREEN_HEIGHT // 2 + (50 + LANE_SIZE)
+            self.direction = -1
         elif(lane == 3):
-            self.center_x = SCREEN_WIDTH - 80
+            self.center_x = SCREEN_WIDTH + 80
             self.center_y = SCREEN_HEIGHT // 2 + (50 - LANE_SIZE)
+            self.direction = -1
         elif(lane == 4):
-            self.center_x = SCREEN_WIDTH - 80
+            self.center_x = SCREEN_WIDTH + 80
             self.center_y = SCREEN_HEIGHT // 2 + 50
+            self.direction = -1
         elif(lane == 5):
-            self.center_x = SCREEN_WIDTH - 80
+            self.center_x = SCREEN_WIDTH + 80
             self.center_y = SCREEN_HEIGHT // 2 + (50 + LANE_SIZE)
+            self.direction = -1
         
     
     def update(self):
-        pass 
+        self.center_x += (2 * self.direction)

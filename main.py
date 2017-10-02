@@ -15,6 +15,7 @@ class GameWindow(arcade.Window):
         
         self.sprite_list = []
         self.enemy_list = []
+
         arcade.set_background_color(arcade.color.BLACK)
 
         #set player up
