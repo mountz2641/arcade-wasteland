@@ -9,9 +9,9 @@ class Player(arcade.Sprite):
         self.center_x = x
         self.center_y = y
         self.location = 1
-        """ 2
-            1
-            0
+        """ 2   5
+            1   4
+            0   3
         """
     def walk(self, direction):
         if(direction == 'up'):
@@ -20,3 +20,9 @@ class Player(arcade.Sprite):
         elif(direction == 'down'):
             self.location -= 1
             self.center_y -= LANE_SIZE
+        elif(direction == 'left'):
+            self.location -= 3
+            self.center_x -= 50
+        elif(direction == 'right'):
+            self.location += 3
+            self.center_x += 50
