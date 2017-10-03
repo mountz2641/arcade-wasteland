@@ -6,9 +6,13 @@ SCREEN_HEIGHT = 500
 LANE_SIZE = 100
 
 class Enemy (arcade.Sprite):
-    def setup(self, lane):
+    def setup(self, world, lane):
         self.health = 1
         self.direction = 1
+        self.world = world
+        self.speed = 2
+        self.lane = lane
+        self.damage = 1
         if(lane == 0):
             self.center_x = -80
             self.center_y = SCREEN_HEIGHT // 2 + (50 - LANE_SIZE)
@@ -32,8 +36,11 @@ class Enemy (arcade.Sprite):
         elif(lane == 5):
             self.center_x = SCREEN_WIDTH + 80
             self.center_y = SCREEN_HEIGHT // 2 + (50 + LANE_SIZE)
-            self.direction = -1
-        
+            self.direction = -1 
+    
+    def stop(self):
+        self.speed = 0        
     
     def update(self):
-        self.center_x += (2 * self.direction)
+        self.center_x += (self.speed * self.direction)
+

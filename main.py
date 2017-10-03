@@ -26,27 +26,31 @@ class GameWindow(arcade.Window):
         self.sprite_list.append(self.player)
 
         #construct 6 wall
-        for i in range (0, 6):
+        for lane in range (0, 6):
             self.wall = Wall('./image/wall.png', 1)
-            self.wall.setup(i)
+            self.wall.setup(self, lane)
             self.wall_list.append(self.wall)
 
     def on_key_press(self, key, key_modifiers):
         if(key == arcade.key.UP):
-            if(self.player.location != 2 and self.player.location != 5):
+            if(self.player.lane != 2 and self.player.lane != 5):
                 self.player.walk('up')
         elif(key == arcade.key.DOWN):
-            if(self.player.location != 0 and self.player.location != 3):
+            if(self.player.lane != 0 and self.player.lane != 3):
                 self.player.walk('down')
         elif(key == arcade.key.LEFT):
-            if(self.player.location > 2):
+            if(self.player.lane > 2):
                 self.player.walk('left')
         elif(key == arcade.key.RIGHT):
-            if(self.player.location <= 2):
+            if(self.player.lane <= 2):
                 self.player.walk('right')
 
     def update(self, delta):
         self.spawn_monster(delta)
+        for enemy in self.enemy_list:
+            if(arcade.geometry.check_for_collision(enemy, self.wall_list[enemy.lane])):
+                self.wall_list[enemy.lane].getDamage(enemy.damage)
+                self.enemy_list.remove(enemy)
         for enemy in self.enemy_list:
             enemy.update()
 
@@ -57,7 +61,7 @@ class GameWindow(arcade.Window):
         self.time -= 0.5
         if(randint(0,10) <= self.spawn_rate):
             self.new_enemy = Enemy('./image/zombie.png', 0.2)
-            self.new_enemy.setup(randint(0,5))
+            self.new_enemy.setup(self, randint(0,5))
             self.enemy_list.append(self.new_enemy)
 
     def on_draw(self):
