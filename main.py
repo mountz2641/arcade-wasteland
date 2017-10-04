@@ -2,6 +2,7 @@ import arcade
 from player import Player
 from enemy import Enemy
 from wall import Wall
+from bullet import Bullet
 from random import randint
 
 SCREEN_WIDTH = 1000
@@ -17,12 +18,13 @@ class GameWindow(arcade.Window):
         self.sprite_list = []
         self.enemy_list = []
         self.wall_list = []
+        self.bullet_list = []
 
         arcade.set_background_color(arcade.color.BLACK)
 
         #set player up
         self.player = Player('./image/cowboy.png', 0.1)
-        self.player.setup(self, width // 2 - 25, height // 2 + 50)
+        self.player.setup(self, width // 2 - 25, height // 2 + 50, self.enemy_list)
         self.sprite_list.append(self.player)
 
         #construct 6 wall
@@ -32,6 +34,7 @@ class GameWindow(arcade.Window):
             self.wall_list.append(self.wall)
 
     def on_key_press(self, key, key_modifiers):
+        #player movement
         if(key == arcade.key.UP):
             if(self.player.lane != 2 and self.player.lane != 5):
                 self.player.walk('up')
@@ -44,6 +47,10 @@ class GameWindow(arcade.Window):
         elif(key == arcade.key.RIGHT):
             if(self.player.lane <= 2):
                 self.player.walk('right')
+        
+        #player action
+        if(key == arcade.key.SPACE):
+            self.player.action()
 
     def update(self, delta):
         self.spawn_monster(delta)
@@ -53,16 +60,21 @@ class GameWindow(arcade.Window):
                 self.enemy_list.remove(enemy)
         for enemy in self.enemy_list:
             enemy.update()
+        for bullet in self.bullet_list:
+            bullet.update()
+        
 
     def spawn_monster(self, delta):
         self.time += delta
-        if(self.time < 0.5):
-            return
-        self.time -= 0.5
-        if(randint(0,10) <= self.spawn_rate):
-            self.new_enemy = Enemy('./image/zombie.png', 0.2)
-            self.new_enemy.setup(self, randint(0,5))
-            self.enemy_list.append(self.new_enemy)
+        if(self.time > 0.5):
+            self.time -= 0.5
+            if(randint(0,10) <= self.spawn_rate):
+                self.new_enemy = Enemy('./image/zombie.png', 0.2)
+                self.new_enemy.setup(self, randint(0,5))
+                self.enemy_list.append(self.new_enemy)
+
+    def enemy_dead(self, enemy):
+        self.enemy_list.remove(enemy)
 
     def on_draw(self):
         arcade.start_render()
@@ -72,6 +84,8 @@ class GameWindow(arcade.Window):
             enemy.draw()
         for wall in self.wall_list:
             wall.draw()
+        for bullet in self.bullet_list:
+            bullet.draw()
 
 
 def main():
