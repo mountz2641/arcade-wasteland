@@ -7,13 +7,17 @@ from random import randint
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 500
+DIR_UP = 1
+DIR_RIGHT = 2
+DIR_DOWN = 3
+DIR_LEFT = 4
 
 class GameWindow(arcade.Window):
     def __init__(self, width, height):
         super().__init__(width, height)
 
         self.time = 0
-        self.spawn_rate = 2;
+        self.spawn_rate = 10;
         
         self.sprite_list = []
         self.enemy_list = []
@@ -37,23 +41,23 @@ class GameWindow(arcade.Window):
         #player movement
         if(key == arcade.key.UP):
             if(self.player.lane != 2 and self.player.lane != 5):
-                self.player.walk('up')
+                self.player.walk(DIR_UP)
         elif(key == arcade.key.DOWN):
             if(self.player.lane != 0 and self.player.lane != 3):
-                self.player.walk('down')
+                self.player.walk(DIR_DOWN)
         elif(key == arcade.key.LEFT):
             if(self.player.lane > 2):
-                self.player.walk('left')
+                self.player.walk(DIR_LEFT)
         elif(key == arcade.key.RIGHT):
             if(self.player.lane <= 2):
-                self.player.walk('right')
+                self.player.walk(DIR_RIGHT)
         
         #player action
         if(key == arcade.key.SPACE):
             self.player.action()
 
     def update(self, delta):
-        self.spawn_monster(delta)
+        self.spawn_enemy(delta)
         for enemy in self.enemy_list:
             if(arcade.geometry.check_for_collision(enemy, self.wall_list[enemy.lane])):
                 self.wall_list[enemy.lane].getDamage(enemy.damage)
@@ -64,7 +68,7 @@ class GameWindow(arcade.Window):
             bullet.update()
         
 
-    def spawn_monster(self, delta):
+    def spawn_enemy(self, delta):
         self.time += delta
         if(self.time > 0.5):
             self.time -= 0.5
@@ -78,14 +82,14 @@ class GameWindow(arcade.Window):
 
     def on_draw(self):
         arcade.start_render()
-        for sprite in self.sprite_list:
-            sprite.draw()
         for enemy in self.enemy_list:
             enemy.draw()
         for wall in self.wall_list:
             wall.draw()
         for bullet in self.bullet_list:
             bullet.draw()
+        for sprite in self.sprite_list:
+            sprite.draw()
 
 
 def main():

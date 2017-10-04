@@ -31,7 +31,7 @@ class Bullet(arcade.Sprite):
         self.hitted_enemy = self.check_enemy()
         if(self.center_x > SCREEN_WIDTH + 60 or self.center_x < -60):
             self.world.bullet_list.remove(self)
-        if(self.hitted_enemy != None):
+        elif(self.hitted_enemy != None):
             self.world.enemy_dead(self.hitted_enemy)
             self.collision_list = []
             self.world.bullet_list.remove(self)
