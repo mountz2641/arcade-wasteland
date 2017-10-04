@@ -16,9 +16,11 @@ class Bullet(arcade.Sprite):
         self.enemy_list = enemy_list
         if(lane > 2):
             self.direction = 1
+            self.center_x = player.center_x + 40 
         else:
             self.direction = -1
             self.angle = 180
+            self.center_x = player.center_x - 40
             
     def check_enemy(self):
         for enemy in self.enemy_list:
