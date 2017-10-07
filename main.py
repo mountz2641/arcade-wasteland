@@ -23,6 +23,7 @@ class GameWindow(arcade.Window):
         self.enemy_list = []
         self.wall_list = []
         self.bullet_list = []
+        self.gun = None
 
         arcade.set_background_color(arcade.color.BLACK)
 
@@ -55,9 +56,12 @@ class GameWindow(arcade.Window):
         #player action
         if(key == arcade.key.SPACE):
             self.player.action()
+        elif(key == arcade.key.R):
+                self.gun.reload_gun()
 
     def update(self, delta):
         self.spawn_enemy(delta)
+        self.gun.update(delta)
         for enemy in self.enemy_list:
             if(arcade.geometry.check_for_collision(enemy, self.wall_list[enemy.lane])):
                 self.wall_list[enemy.lane].getDamage(enemy.damage)
@@ -70,8 +74,8 @@ class GameWindow(arcade.Window):
 
     def spawn_enemy(self, delta):
         self.time += delta
-        if(self.time > 0.5):
-            self.time -= 0.5
+        if(self.time > 0.4):
+            self.time -= 0.4
             if(randint(0,10) <= self.spawn_rate):
                 self.new_enemy = Enemy('./image/zombie.png', 0.2)
                 self.new_enemy.setup(self, randint(0,5))
@@ -90,6 +94,7 @@ class GameWindow(arcade.Window):
             bullet.draw()
         for sprite in self.sprite_list:
             sprite.draw()
+        arcade.render_text(self.gun.ammo_text,900,100)
 
 
 def main():

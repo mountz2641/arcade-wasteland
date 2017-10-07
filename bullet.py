@@ -11,7 +11,6 @@ class Bullet(arcade.Sprite):
         self.speed = 6
         self.center_x = player.center_x                
         self.center_y = player.center_y
-        self.collision_list = []
         self.hitted_enemy = None
         self.enemy_list = enemy_list
         if(lane > 2):

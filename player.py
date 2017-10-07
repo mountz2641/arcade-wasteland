@@ -21,6 +21,7 @@ class Player(arcade.Sprite):
         self.gun = Gun('./image/revolver_left.png', 0.5)
         self.gun.setup(self, world, self.lane)
         self.world.sprite_list.append(self.gun)
+        self.world.gun = self.gun
 
     def walk(self, direction):
         if(direction == DIR_UP):
@@ -42,7 +43,8 @@ class Player(arcade.Sprite):
 
     def action(self):
         if(self.item == GUN):
-            self.shoot()
+            if(self.gun.shoot()):
+                self.shoot()
 
     def shoot(self):
         self.bullet = Bullet('./image/bullet.png',1)
