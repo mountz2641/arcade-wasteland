@@ -34,6 +34,6 @@ class Bullet(arcade.Sprite):
             self.world.bullet_list.remove(self)
         elif(self.hitted_enemy != None):
             self.world.enemy_dead(self.hitted_enemy)
-            self.collision_list = []
             self.world.bullet_list.remove(self)
+            self.player.plusScore(self.hitted_enemy.bounty)
 

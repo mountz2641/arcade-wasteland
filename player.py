@@ -9,6 +9,7 @@ DIR_UP = 1
 DIR_RIGHT = 2
 DIR_DOWN = 3
 DIR_LEFT = 4
+SCORE_UP_LEVEL = 200
 
 class Player(arcade.Sprite):
     def setup(self, world, x, y, enemy_list):
@@ -22,6 +23,8 @@ class Player(arcade.Sprite):
         self.gun.setup(self, world, self.lane)
         self.world.sprite_list.append(self.gun)
         self.world.gun = self.gun
+        self.score = 0
+        self.counter = 0
 
     def walk(self, direction):
         if(direction == DIR_UP):
@@ -50,3 +53,12 @@ class Player(arcade.Sprite):
         self.bullet = Bullet('./image/bullet.png',1)
         self.bullet.setup(self, self.lane, self.world, self.enemy_list)
         self.world.bullet_list.append(self.bullet)
+
+    def plusScore(self, score):
+        self.score += score
+        self.counter += score
+        if(self.counter >= SCORE_UP_LEVEL):
+            self.counter -= SCORE_UP_LEVEL
+            self.world.increase_level()
+
+    

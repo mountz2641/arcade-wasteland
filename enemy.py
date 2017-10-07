@@ -13,6 +13,7 @@ class Enemy (arcade.Sprite):
         self.speed = 3
         self.lane = lane
         self.damage = 1
+        self.bounty = 10
         if(lane == 0):
             self.center_x = -80
             self.center_y = SCREEN_HEIGHT // 2 + (50 - LANE_SIZE)

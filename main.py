@@ -24,6 +24,7 @@ class GameWindow(arcade.Window):
         self.wall_list = []
         self.bullet_list = []
         self.gun = None
+        self.level = 1
 
         arcade.set_background_color(arcade.color.BLACK)
 
@@ -60,6 +61,7 @@ class GameWindow(arcade.Window):
                 self.gun.reload_gun()
 
     def update(self, delta):
+        print('delta time is: %f'%(delta))
         self.spawn_enemy(delta)
         self.gun.update(delta)
         for enemy in self.enemy_list:
@@ -70,6 +72,8 @@ class GameWindow(arcade.Window):
             enemy.update()
         for bullet in self.bullet_list:
             bullet.update()
+        self.score_text = arcade.create_text('Level: ' + str(self.level) + '\nScore: ' + str(self.player.score), 
+                                                arcade.color.WHITE, 30, align="center", anchor_x="center", anchor_y="center")
         
 
     def spawn_enemy(self, delta):
@@ -84,6 +88,13 @@ class GameWindow(arcade.Window):
     def enemy_dead(self, enemy):
         self.enemy_list.remove(enemy)
 
+    def increase_level(self):
+        self.level += 1
+        self.spawn_rate += 5
+        if(self.level > 10):
+            self.game_win()
+
+
     def on_draw(self):
         arcade.start_render()
         for enemy in self.enemy_list:
@@ -95,6 +106,7 @@ class GameWindow(arcade.Window):
         for sprite in self.sprite_list:
             sprite.draw()
         arcade.render_text(self.gun.ammo_text,900,100)
+        arcade.render_text(self.score_text, 500, 100)
 
 
 def main():
