@@ -17,7 +17,7 @@ class GameWindow(arcade.Window):
         super().__init__(width, height)
 
         self.time = 0
-        self.spawn_rate = 10;
+        self.spawn_rate = 45;
         
         self.sprite_list = []
         self.enemy_list = []
@@ -80,7 +80,7 @@ class GameWindow(arcade.Window):
         self.time += delta
         if(self.time > 0.4):
             self.time -= 0.4
-            if(randint(0,10) <= self.spawn_rate):
+            if(randint(0,100) <= self.spawn_rate):
                 self.new_enemy = Enemy('./image/zombie.png', 0.2)
                 self.new_enemy.setup(self, randint(0,5))
                 self.enemy_list.append(self.new_enemy)
