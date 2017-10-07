@@ -8,7 +8,7 @@ class Bullet(arcade.Sprite):
         self.player = player
         self.lane = lane
         self.world = world
-        self.speed = 600
+        self.speed = 800
         self.center_x = player.center_x                
         self.center_y = player.center_y
         self.hitted_enemy = None
