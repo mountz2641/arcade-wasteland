@@ -10,7 +10,7 @@ class Enemy (arcade.Sprite):
         self.health = 1
         self.direction = 1
         self.world = world
-        self.speed = 3
+        self.speed = 150
         self.lane = lane
         self.damage = 1
         self.bounty = 10
@@ -39,6 +39,6 @@ class Enemy (arcade.Sprite):
             self.center_y = SCREEN_HEIGHT // 2 + (50 + LANE_SIZE)
             self.direction = -1        
     
-    def update(self):
-        self.center_x += (self.speed * self.direction)
+    def update(self, delta):
+        self.center_x += (int(self.speed * delta) * self.direction)
 

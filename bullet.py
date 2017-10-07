@@ -8,7 +8,7 @@ class Bullet(arcade.Sprite):
         self.player = player
         self.lane = lane
         self.world = world
-        self.speed = 6
+        self.speed = 600
         self.center_x = player.center_x                
         self.center_y = player.center_y
         self.hitted_enemy = None
@@ -27,8 +27,8 @@ class Bullet(arcade.Sprite):
                 return enemy
         return None
 
-    def update(self):
-        self.center_x += self.speed * self.direction
+    def update(self, delta):
+        self.center_x += (int(self.speed * delta) * self.direction)
         self.hitted_enemy = self.check_enemy()
         if(self.center_x > SCREEN_WIDTH + 60 or self.center_x < -60):
             self.world.bullet_list.remove(self)

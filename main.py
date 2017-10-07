@@ -69,9 +69,9 @@ class GameWindow(arcade.Window):
                 self.wall_list[enemy.lane].getDamage(enemy.damage)
                 self.enemy_list.remove(enemy)
         for enemy in self.enemy_list:
-            enemy.update()
+            enemy.update(delta)
         for bullet in self.bullet_list:
-            bullet.update()
+            bullet.update(delta)
         self.score_text = arcade.create_text('Level: ' + str(self.level) + '\nScore: ' + str(self.player.score), 
                                                 arcade.color.WHITE, 30, align="center", anchor_x="center", anchor_y="center")
         
