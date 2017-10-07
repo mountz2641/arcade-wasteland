@@ -6,7 +6,7 @@ LANE_SIZE = 100
 
 class Wall(arcade.Sprite):
     def setup(self, world, lane):
-        self.health = 10
+        self.health = 5
         self.world = world
         self.lane = lane
         if(lane == 0):
@@ -31,3 +31,6 @@ class Wall(arcade.Sprite):
     def getDamage(self, damage):
         self.health -= damage
         print('wall %d get damage %d remain %d' %(self.lane, damage, self.health))
+        if(self.health <= 0):
+            self.world.game_over()
+            self.texture = arcade.load_texture('./image/broken_wall.png')

@@ -25,6 +25,7 @@ class Player(arcade.Sprite):
         self.world.gun = self.gun
         self.score = 0
         self.counter = 0
+        self.dead_texture = arcade.load_texture('./image/dead_cowboy.png', scale = 0.1)
 
     def walk(self, direction):
         if(direction == DIR_UP):
@@ -53,6 +54,9 @@ class Player(arcade.Sprite):
         self.bullet = Bullet('./image/bullet.png',1)
         self.bullet.setup(self, self.lane, self.world, self.enemy_list)
         self.world.bullet_list.append(self.bullet)
+
+    def dead(self):
+        self.texture = self.dead_texture
 
     def plusScore(self, score):
         self.score += score

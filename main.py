@@ -11,6 +11,9 @@ DIR_UP = 1
 DIR_RIGHT = 2
 DIR_DOWN = 3
 DIR_LEFT = 4
+GAME_RUNNING = 10
+GAME_OVER = 11
+GAME_WIN = 12
 
 class GameWindow(arcade.Window):
     def __init__(self, width, height):
@@ -25,6 +28,9 @@ class GameWindow(arcade.Window):
         self.bullet_list = []
         self.gun = None
         self.level = 1
+        self.game_stage = GAME_RUNNING
+        self.result_text = arcade.create_text("", arcade.color.WHITE, 30, 
+                                            align="center", anchor_x="center", anchor_y="center")
 
         arcade.set_background_color(arcade.color.BLACK)
 
@@ -55,12 +61,16 @@ class GameWindow(arcade.Window):
                 self.player.walk(DIR_RIGHT)
         
         #player action
+        if(self.game_stage != GAME_RUNNING):
+            return
         if(key == arcade.key.SPACE):
             self.player.action()
         elif(key == arcade.key.R):
-                self.gun.reload_gun()
+            self.gun.reload_gun()
 
     def update(self, delta):
+        if(self.game_stage != GAME_RUNNING):
+            return
         print('delta time is: %f'%(delta))
         self.spawn_enemy(delta)
         self.gun.update(delta)
@@ -94,6 +104,15 @@ class GameWindow(arcade.Window):
         if(self.level > 10):
             self.game_win()
 
+    def game_win(self):
+        self.game_stage = GAME_WIN
+        self.result_text = arcade.create_text('YOU WIN', arcade.color.WHITE, 200, align="center", anchor_x="center", anchor_y="center")
+        self.enemy_list = []
+
+    def game_over(self):
+        self.game_stage = GAME_OVER
+        self.result_text = arcade.create_text('YOU DIED', arcade.color.WHITE, 190, align="center", anchor_x="center", anchor_y="center")
+        self.player.dead()
 
     def on_draw(self):
         arcade.start_render()
@@ -107,7 +126,7 @@ class GameWindow(arcade.Window):
             sprite.draw()
         arcade.render_text(self.gun.ammo_text,900,100)
         arcade.render_text(self.score_text, 500, 100)
-
+        arcade.render_text(self.result_text, 500, 275)
 
 def main():
     window = GameWindow(SCREEN_WIDTH, SCREEN_HEIGHT)
