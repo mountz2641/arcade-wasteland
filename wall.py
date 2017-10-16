@@ -9,6 +9,12 @@ class Wall(arcade.Sprite):
         self.health = 5
         self.world = world
         self.lane = lane
+        self.health_sprite = []
+        self.health_sprite.append(arcade.load_texture('./image/broken_wall.png'))
+        self.health_sprite.append(arcade.load_texture('./image/wall_1.png'))
+        self.health_sprite.append(arcade.load_texture('./image/wall_2.png'))
+        self.health_sprite.append(arcade.load_texture('./image/wall_3.png'))
+        self.health_sprite.append(arcade.load_texture('./image/wall_4.png'))
         if(lane == 0):
             self.center_x = SCREEN_WIDTH // 2 - 90
             self.center_y = SCREEN_HEIGHT // 2 + (50 - LANE_SIZE)
@@ -30,7 +36,7 @@ class Wall(arcade.Sprite):
 
     def getDamage(self, damage):
         self.health -= damage
+        self.texture = self.health_sprite[self.health]
         print('wall %d get damage %d remain %d' %(self.lane, damage, self.health))
         if(self.health <= 0):
             self.world.game_over()
-            self.texture = arcade.load_texture('./image/broken_wall.png')
