@@ -10,7 +10,7 @@ class Enemy (arcade.Sprite):
         self.health = 1
         self.direction = 1
         self.world = world
-        self.speed = 150
+        self.speed = 200
         self.lane = lane
         self.damage = 1
         self.bounty = 10
