@@ -7,8 +7,8 @@ class Gun(arcade.Sprite):
     def setup(self, player, world, lane):
         self.player = player
         self.world = world
-        self.gun_left = arcade.load_texture('./image/revolver_left.png')
-        self.gun_right = arcade.load_texture('./image/revolver_right.png')
+        self.gun_left = arcade.load_texture('./image/revolver_left.png',scale = 0.7)
+        self.gun_right = arcade.load_texture('./image/revolver_right.png',scale = 0.7)
         self.texture = self.gun_left
         self.center_x = player.center_x - 30
         self.center_y = player.center_y
