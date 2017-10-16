@@ -32,7 +32,7 @@ class GameWindow(arcade.Window):
         self.result_text = arcade.create_text("", arcade.color.WHITE, 30, 
                                             align="center", anchor_x="center", anchor_y="center")
 
-        arcade.set_background_color(arcade.color.BLACK)
+        self.background = arcade.load_texture('./image/wasteland_background.png') 
 
         #set player up
         self.player = Player('./image/cowboy.png', 0.1)
@@ -116,6 +116,7 @@ class GameWindow(arcade.Window):
 
     def on_draw(self):
         arcade.start_render()
+        arcade.draw_texture_rectangle(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
         for enemy in self.enemy_list:
             enemy.draw()
         for wall in self.wall_list:
