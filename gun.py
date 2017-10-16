@@ -1,7 +1,7 @@
 import arcade
 
 LANE_SIZE = 100
-RELOAD_TIME = 0.5
+RELOAD_TIME = 0.75
 
 class Gun(arcade.Sprite):
     def setup(self, player, world, lane):
@@ -13,6 +13,7 @@ class Gun(arcade.Sprite):
         self.center_x = player.center_x - 30
         self.center_y = player.center_y
         self.ammo = 6
+        self.max_ammo = 6
         self.isReload = False
         self.wait = 0
 
@@ -34,7 +35,7 @@ class Gun(arcade.Sprite):
                 self.ammo = 6
                 self.isReload = False
                 self.wait = 0
-        self.ammo_text = arcade.create_text(str(self.ammo), arcade.color.WHITE, 20, 
+        self.ammo_text = arcade.create_text("Ammo: " + str(self.ammo) + " / " + str(self.max_ammo), arcade.color.WHITE, 25, 
                                             align="center", anchor_x="center", anchor_y="center")
 
     def reload_gun(self):
