@@ -83,7 +83,7 @@ class GameWindow(arcade.Window):
         for bullet in self.bullet_list:
             bullet.update(delta)
         self.score_text = arcade.create_text('Level: ' + str(self.level) + '\nScore: ' + str(self.player.score), 
-                                                arcade.color.WHITE, 30, align="center", anchor_x="center", anchor_y="center")
+                                                arcade.color.BLACK, 30, align="center", anchor_x="center", anchor_y="center")
         
 
     def spawn_enemy(self, delta):
@@ -102,6 +102,7 @@ class GameWindow(arcade.Window):
         self.level += 1
         self.spawn_rate += 5
         if(self.level > 10):
+            self.level -= 1
             self.game_win()
 
     def game_win(self):

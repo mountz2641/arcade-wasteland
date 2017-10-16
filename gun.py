@@ -35,7 +35,7 @@ class Gun(arcade.Sprite):
                 self.ammo = 6
                 self.isReload = False
                 self.wait = 0
-        self.ammo_text = arcade.create_text("Ammo: " + str(self.ammo) + " / " + str(self.max_ammo), arcade.color.WHITE, 25, 
+        self.ammo_text = arcade.create_text("Ammo: " + str(self.ammo) + " / " + str(self.max_ammo), arcade.color.BLACK, 25, 
                                             align="center", anchor_x="center", anchor_y="center")
 
     def reload_gun(self):
