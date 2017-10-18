@@ -39,6 +39,8 @@ class Gun(arcade.Sprite):
                                             align="center", anchor_x="center", anchor_y="center")
 
     def reload_gun(self):
+        if self.ammo == self.max_ammo:
+            return
         self.isReload = True
 
     def shoot(self):
