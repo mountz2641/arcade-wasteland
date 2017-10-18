@@ -63,9 +63,9 @@ class GameWindow(arcade.Window):
         #player action
         if self.game_stage != GAME_RUNNING:
             return
-        if key == arcade.key.SPACE:
+        if key == arcade.key.C:
             self.player.action()
-        elif key == arcade.key.R:
+        elif key == arcade.key.X:
             self.gun.reload_gun()
 
     def update(self, delta):
