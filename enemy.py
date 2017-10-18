@@ -14,27 +14,27 @@ class Enemy (arcade.Sprite):
         self.lane = lane
         self.damage = 1
         self.bounty = 10
-        if(lane == 0):
+        if lane == 0:
             self.center_x = -80
             self.center_y = SCREEN_HEIGHT // 2 + (50 - LANE_SIZE)
             self.direction = 1
-        elif(lane == 1):
+        elif lane == 1:
             self.center_x = -80
             self.center_y = SCREEN_HEIGHT // 2 + 50
             self.direction = 1
-        elif(lane == 2):
+        elif lane == 2:
             self.center_x = -80
             self.center_y = SCREEN_HEIGHT // 2 + (50 + LANE_SIZE)
             self.direction = -1
-        elif(lane == 3):
+        elif lane == 3:
             self.center_x = SCREEN_WIDTH + 80
             self.center_y = SCREEN_HEIGHT // 2 + (50 - LANE_SIZE)
             self.direction = -1
-        elif(lane == 4):
+        elif lane == 4:
             self.center_x = SCREEN_WIDTH + 80
             self.center_y = SCREEN_HEIGHT // 2 + 50
             self.direction = -1
-        elif(lane == 5):
+        elif lane == 5:
             self.center_x = SCREEN_WIDTH + 80
             self.center_y = SCREEN_HEIGHT // 2 + (50 + LANE_SIZE)
             self.direction = -1        

@@ -29,9 +29,9 @@ class Gun(arcade.Sprite):
         self.texture = self.gun_right
 
     def update(self,delta):
-        if(self.isReload):
+        if self.isReload:
             self.wait += delta
-            if(self.wait > RELOAD_TIME):
+            if self.wait > RELOAD_TIME:
                 self.ammo = 6
                 self.isReload = False
                 self.wait = 0
@@ -42,15 +42,11 @@ class Gun(arcade.Sprite):
         self.isReload = True
 
     def shoot(self):
-        if(self.isReload):
+        if self.isReload:
             return False
         else:
             self.ammo -= 1
             if(self.ammo <= 0):
                 self.reload_gun()
-        return True    
-
-
-        
-        
-        
+        return True
+    

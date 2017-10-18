@@ -47,25 +47,25 @@ class GameWindow(arcade.Window):
 
     def on_key_press(self, key, key_modifiers):
         #player movement
-        if(key == arcade.key.UP):
-            if(self.player.lane != 2 and self.player.lane != 5):
+        if key == arcade.key.UP:
+            if self.player.lane != 2 and self.player.lane != 5:
                 self.player.walk(DIR_UP)
-        elif(key == arcade.key.DOWN):
-            if(self.player.lane != 0 and self.player.lane != 3):
+        elif key == arcade.key.DOWN:
+            if self.player.lane != 0 and self.player.lane != 3:
                 self.player.walk(DIR_DOWN)
-        elif(key == arcade.key.LEFT):
-            if(self.player.lane > 2):
+        elif key == arcade.key.LEFT:
+            if self.player.lane > 2:
                 self.player.walk(DIR_LEFT)
-        elif(key == arcade.key.RIGHT):
-            if(self.player.lane <= 2):
+        elif key == arcade.key.RIGHT:
+            if self.player.lane <= 2:
                 self.player.walk(DIR_RIGHT)
         
         #player action
-        if(self.game_stage != GAME_RUNNING):
+        if self.game_stage != GAME_RUNNING:
             return
-        if(key == arcade.key.SPACE):
+        if key == arcade.key.SPACE:
             self.player.action()
-        elif(key == arcade.key.R):
+        elif key == arcade.key.R:
             self.gun.reload_gun()
 
     def update(self, delta):
@@ -75,7 +75,7 @@ class GameWindow(arcade.Window):
         self.spawn_enemy(delta)
         self.gun.update(delta)
         for enemy in self.enemy_list:
-            if(arcade.geometry.check_for_collision(enemy, self.wall_list[enemy.lane])):
+            if arcade.geometry.check_for_collision(enemy, self.wall_list[enemy.lane]):
                 self.wall_list[enemy.lane].getDamage(enemy.damage)
                 self.enemy_list.remove(enemy)
         for enemy in self.enemy_list:
@@ -88,7 +88,7 @@ class GameWindow(arcade.Window):
 
     def spawn_enemy(self, delta):
         self.time += delta
-        if(self.time > 0.4):
+        if self.time > 0.4:
             self.time -= 0.4
             if(randint(0,100) <= self.spawn_rate):
                 self.new_enemy = Enemy('./image/zombie.png', 0.2)
@@ -101,7 +101,7 @@ class GameWindow(arcade.Window):
     def increase_level(self):
         self.level += 1
         self.spawn_rate += 5
-        if(self.level > 10):
+        if self.level > 10:
             self.level -= 1
             self.game_win()
 
@@ -137,3 +137,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    

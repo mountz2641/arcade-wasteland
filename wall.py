@@ -15,22 +15,22 @@ class Wall(arcade.Sprite):
         self.health_sprite.append(arcade.load_texture('./image/wall_2.png'))
         self.health_sprite.append(arcade.load_texture('./image/wall_3.png'))
         self.health_sprite.append(arcade.load_texture('./image/wall_4.png'))
-        if(lane == 0):
+        if lane == 0:
             self.center_x = SCREEN_WIDTH // 2 - 90
             self.center_y = SCREEN_HEIGHT // 2 + (50 - LANE_SIZE)
-        elif(lane == 1):
+        elif lane == 1:
             self.center_x = SCREEN_WIDTH // 2 - 90
             self.center_y = SCREEN_HEIGHT // 2 + 50
-        elif(lane == 2):
+        elif lane == 2:
             self.center_x = SCREEN_WIDTH // 2 - 90
             self.center_y = SCREEN_HEIGHT // 2 + 50 + LANE_SIZE
-        elif(lane == 3):
+        elif lane == 3:
             self.center_x = SCREEN_WIDTH // 2 + 90
             self.center_y = SCREEN_HEIGHT // 2 + (50 - LANE_SIZE)
-        elif(lane == 4):
+        elif lane == 4:
             self.center_x = SCREEN_WIDTH // 2 + 90
             self.center_y = SCREEN_HEIGHT // 2 + 50
-        elif(lane == 5):
+        elif lane == 5:
             self.center_x = SCREEN_WIDTH // 2 + 90
             self.center_y = SCREEN_HEIGHT // 2 + (50 + LANE_SIZE)
 
@@ -38,5 +38,6 @@ class Wall(arcade.Sprite):
         self.health -= damage
         self.texture = self.health_sprite[self.health]
         print('wall %d get damage %d remain %d' %(self.lane, damage, self.health))
-        if(self.health <= 0):
+        if self.health <= 0:
             self.world.game_over()
+            

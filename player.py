@@ -28,26 +28,26 @@ class Player(arcade.Sprite):
         self.dead_texture = arcade.load_texture('./image/dead_cowboy.png', scale = 0.1)
 
     def walk(self, direction):
-        if(direction == DIR_UP):
+        if direction == DIR_UP:
             self.lane += 1
             self.center_y += LANE_SIZE
             self.gun.moveUp()
-        elif(direction == DIR_DOWN):
+        elif direction == DIR_DOWN:
             self.lane -= 1
             self.center_y -= LANE_SIZE
             self.gun.moveDown()
-        elif(direction == DIR_LEFT):
+        elif direction == DIR_LEFT:
             self.lane -= 3
             self.center_x -= 50
             self.gun.swapLeft()
-        elif(direction == DIR_RIGHT):
+        elif direction == DIR_RIGHT:
             self.lane += 3
             self.center_x += 50
             self.gun.swapRight()
 
     def action(self):
-        if(self.item == GUN):
-            if(self.gun.shoot()):
+        if self.item == GUN:
+            if self.gun.shoot():
                 self.shoot()
 
     def shoot(self):
@@ -61,8 +61,6 @@ class Player(arcade.Sprite):
     def plusScore(self, score):
         self.score += score
         self.counter += score
-        if(self.counter >= SCORE_UP_LEVEL):
+        if self.counter >= SCORE_UP_LEVEL:
             self.counter -= SCORE_UP_LEVEL
             self.world.increase_level()
-
-    
